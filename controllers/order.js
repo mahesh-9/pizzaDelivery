@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 
 const Order = require('../models/order');
@@ -14,7 +15,7 @@ exports.getOrders = async(req, res) => {
 
 // View orders based on one user id
 exports.getUserOrder = async(req, res) => {
-	Order.find({_user: req.params.id }, (err, ord) => {
+	Order.find({userId: req.params.id }, (err, ord) => {
 		if (err) throw err;
 		res.status(200).json(ord);
 	})

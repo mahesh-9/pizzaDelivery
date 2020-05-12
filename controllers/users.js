@@ -21,21 +21,21 @@ exports.createAccount = async (req, res) => {
         }
         res.json({"message":"request successful","data":result})
     }catch(error){
-        res.status(500).send(error);
+        res.status(500).send({"error":error});
     }    
 }
 
 exports.authenticateUser = async (req,res) => {
     let {username,password } =req.body; 
     try{
-        let user = await User.findOne({"username":username})
+        let user = await User.findOne({"email":username})
         if(user){
             console.log(user.password,password)
             if(bcrypt.compareSync(password, user.password)){
                 req.session.user = user._id;
                 req.session.save()
                 console.log('sess-log',req.session)
-                res.json({"message":"User authenticated successfully"})
+                res.json({"message":"User authenticated successfully","user":user})
             }else{
                 res.status(500).json({"messsage":"Username/Password combination is not correct"})
             }

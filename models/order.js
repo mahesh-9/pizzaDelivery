@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-
-
 const productSchema = new mongoose.Schema({
     productName: String,
     category: String,
@@ -22,8 +20,7 @@ const productSchema = new mongoose.Schema({
 const orderSchema = new mongoose.Schema({
     name:{type: String, default: "Mahesh"},
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type:String,
     },
     items: {type :[productSchema], default:[]},
     deliveryAddress:{
